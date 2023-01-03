@@ -1,0 +1,55 @@
+from sklearn.datasets import load_iris
+from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
+from sklearn.model_selection import train_test_split
+iris_dataset=load_iris()
+print("\n IRIS FEATURES \ TARGET NAMES: \n ", iris_dataset.target_names)
+for i in range(len(iris_dataset.target_names)):
+print("\n[{0}]:[{1}]".format(i,iris_dataset.target_names[i]))
+IRIS FEATURES \ TARGET NAMES:
+['setosa' 'versicolor' 'virginica']
+[0]:[setosa]
+[1]:[versicolor]
+[2]:[virginica]
+print("\n IRIS DATA :\n",iris_dataset["data"])
+X_train, X_test, y_train, y_test = train_test_split(iris_dataset["data"], iris_dataset["target"], random_state=0)[ 6. 3. 4.8 1.8]
+
+print("\n Target :\n",iris_dataset["target"])
+Target :
+
+print("\n X TRAIN \n", X_train)
+n_train=X_train.shape[0]
+print(n_train)[ 5.9 3.2 4.8 1.8]
+
+print("\n X TEST \n", X_test)
+n_test=X_test.shape[0]
+print(n_test)
+
+print("\n Y TRAIN \n", y_train)
+
+print("\n Y TEST \n", y_test)
+Y TEST
+[2 1 0 2 0 2 0 1 1 1 2 1 1 1 1 0 1 1 0 0 2 1 0 0 2 0 0 1 1 0 2 1 0 2 2 1 0
+1]kn = KNeighborsClassifier(n_neighbors=3)
+kn.fit(X_train, y_train)
+KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+metric_params=None, n_jobs=1, n_neighbors=3, p=2,
+weights='uniform')
+x_new = np.array([[5, 2.9, 1, 0.2]])
+print("\n XNEW \n",x_new)
+XNEW
+[[ 5. 2.9 1. 0.2]]
+prediction = kn.predict(x_new)
+print("\n Predicted target value: {}\n".format(prediction))
+Predicted target value: [0]
+print("\n Predicted feature name: {}\n".format (iris_dataset["target_names"][prediction]))
+Predicted feature name: ['setosa']
+i=1
+x= X_test[i]
+x_new = np.array([x])
+print("\n XNEW \n",x_new)
+for i in range(len(X_test)):
+x = X_test[i]
+x_new = np.array([x])
+prediction = kn.predict(x_new)
+print("\n Actual : {0} {1}, Predicted :{2}{3}".format(y_test[i],iris_dataset["target_names"][y_test[i]],prediction,
